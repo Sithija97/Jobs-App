@@ -1,17 +1,12 @@
 import React from "react";
-import FormGroup from "./formGroup.jsx";
 
-const BMI = () => {
-  const requiredParams = {
-    height: true,
-    weight: true,
-  };
+const WI = () => {
   return (
     <React.Fragment>
       <div className="bg-gray-100 h-screen">
         <div className="flex flex-wrap overflow-hidden px-20 py-20">
           <div className="w-full overflow-hidden bg-white">
-            <FormGroup requiredParams={requiredParams} />
+            <h2>wi</h2>
           </div>
         </div>
       </div>
@@ -19,4 +14,4 @@ const BMI = () => {
   );
 };
 
-export default BMI;
+export default WI;

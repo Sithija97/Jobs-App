@@ -1,31 +1,34 @@
-import React from 'react'
+import React from "react";
 
 function Card() {
-    return (
-        <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 sm:w-1/2 md:my-3 md:px-3 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/4 xl:my-3 xl:px-3 xl:w-1/4">
-            <div class="max-w-sm rounded-2xl bg-white dark:bg-gray-800 overflow-hidden shadow-lg mb-3 mt-2 pl-4 pr-4">
-                <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p class="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                        exercitationem praesentium nihil.
-                    </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        #photography
-                    </span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        #travel
-                    </span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                        #winter
-                    </span>
-                </div>
-            </div>
+  return (
+    <div className="py-20">
+      <div className="mt-5 mb-5 max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+        <div className="px-4 py-2">
+          <h1 className="text-3xl font-bold text-gray-800 uppercase dark:text-white">
+            NIKE AIR
+          </h1>
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quos
+            quidem sequi illum facere recusandae voluptatibus
+          </p>
         </div>
-    )
+
+        <img
+          className="object-cover w-full h-48 mt-2"
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=320&q=80"
+          alt="NIKE AIR"
+        />
+
+        <div className="flex items-center justify-between px-4 py-2 bg-gray-900">
+          <h1 className="text-lg font-bold text-white">$129</h1>
+          <button className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-200 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Card
+export default Card;
