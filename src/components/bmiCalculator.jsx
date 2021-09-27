@@ -8,6 +8,8 @@ const BmiCalculator = () => {
     w_units: "",
   };
   const [data, setData] = useState(initialstate);
+  const { h_value, h_units, w_value, w_units } = data;
+  const [bmi, setBmi] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,13 +19,64 @@ const BmiCalculator = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
+    getBMI();
   };
 
   const handleReset = (e) => {
     e.preventDefault();
     setData(initialstate);
+    setBmi("");
     console.log(data);
   };
+
+  const calculateBMI = (mass, height) => {
+    return mass / height ** 2;
+  };
+
+  const getConvertedHeightValue = (height, value) => {
+    switch (height) {
+      case "cm":
+        return parseFloat(value) / 100;
+      case "inch":
+        return parseFloat(value) * 0.0254;
+      case "ft":
+        return parseFloat(value) * 0.3048;
+      default:
+        return;
+    }
+  };
+
+  const getConvertedMassValue = (mass, value) => {
+    switch (mass) {
+      case "g":
+        return parseFloat(value) / 1000;
+      default:
+        return;
+    }
+  };
+  const getBMI = () => {
+    let mass = 0.0,
+      height = 0.0,
+      bmi = 0.0;
+
+    if (w_units === "kg" && h_units !== "m") {
+      mass = parseFloat(w_value);
+      height = getConvertedHeightValue(h_units, h_value);
+      bmi = calculateBMI(mass, height);
+      setBmi(bmi.toFixed(2));
+    } else if (w_units !== "kg" && h_units === "m") {
+      mass = getConvertedMassValue(w_units, w_value);
+      height = parseFloat(h_value);
+      bmi = calculateBMI(mass, height);
+      setBmi(bmi.toFixed(2));
+    } else {
+      mass = parseFloat(w_value);
+      height = parseFloat(h_value);
+      bmi = calculateBMI(mass, height);
+      setBmi(bmi.toFixed(2));
+    }
+  };
+
   return (
     <div>
       <h5>Body mass Index</h5>
@@ -50,6 +103,7 @@ const BmiCalculator = () => {
               </option>
               <option value="cm">cm</option>
               <option value="inch">inch</option>
+              <option value="m">m</option>
               <option value="ft">ft</option>
             </select>
           </div>
@@ -72,7 +126,7 @@ const BmiCalculator = () => {
                 Choose here
               </option>
               <option value="kg">kg</option>
-              <option value="pounds">pounds</option>
+              {/* <option value="g">grams</option> */}
             </select>
           </div>
 
@@ -87,7 +141,7 @@ const BmiCalculator = () => {
         </form>
       </div>
       <div>
-        <h6>Your bmi value is : </h6>
+        <h6>{`Your bmi value is : ${bmi}`}</h6>
       </div>
     </div>
   );
