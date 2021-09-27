@@ -1,13 +1,22 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BmiCalculator from "./components/bmiCalculator";
+import MainPage from "./components/mainPage";
+import WiCalculator from "./components/wiCalculator";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <BmiCalculator />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Switch>
+            <Route path="/bmi" component={BmiCalculator} />
+            <Route path="/wi" component={WiCalculator} />
+            <Route path="/" component={MainPage} />
+          </Switch>
+        </header>
+      </div>
+    </Router>
   );
 }
 

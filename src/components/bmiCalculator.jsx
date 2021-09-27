@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const BmiCalculator = () => {
   const initialstate = {
@@ -77,6 +78,7 @@ const BmiCalculator = () => {
     }
   };
 
+  let history = useHistory();
   return (
     <div>
       <h5>Body mass Index</h5>
@@ -143,6 +145,8 @@ const BmiCalculator = () => {
       <div>
         <h6>{`Your bmi value is : ${bmi}`}</h6>
       </div>
+      <br />
+      <button onClick={() => history.push("/")}>home</button>
     </div>
   );
 };
