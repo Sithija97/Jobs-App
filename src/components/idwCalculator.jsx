@@ -4,21 +4,39 @@ import { useHistory } from "react-router-dom";
 const IdwCalculator = () => {
   let history = useHistory();
   const [height, setHeight] = useState("");
+  const [ibw, setIbw] = useState("");
   const [units, setUnits] = useState("metric");
   const [gender, setGender] = useState("male");
 
-  const getMetricIBW = () => {};
+  const getMetricIBW = () => {
+    let height_fts = parseFloat(height) * 3.28084;
+    if (gender === "male") {
+      let base_value = ~~(parseFloat(height_fts) / 5) * 106;
+      let increment = parseInt(height_fts) % 5;
+      let increment_value = increment * 6;
+      console.log(base_value + increment_value);
+      return base_value + increment_value;
+    } else {
+      let base_value = ~~(parseFloat(height_fts) / 5) * 105;
+      let increment = parseInt(height_fts) % 5;
+      let increment_value = increment * 5;
+      console.log(base_value + increment_value);
+      return base_value + increment_value;
+    }
+  };
 
   const getImprialIBW = () => {
     if (gender === "male") {
       let base_value = ~~(parseFloat(height) / 5) * 106;
-      let increment = parseFloat(height) % 5;
+      let increment = parseInt(height) % 5;
       let increment_value = increment * 6;
+      console.log(base_value + increment_value);
       return base_value + increment_value;
     } else {
       let base_value = ~~(parseFloat(height) / 5) * 105;
-      let increment = parseFloat(height) % 5;
+      let increment = parseInt(height) % 5;
       let increment_value = increment * 5;
+      console.log(base_value + increment_value);
       return base_value + increment_value;
     }
   };
@@ -26,7 +44,7 @@ const IdwCalculator = () => {
   const getIBW = () => {
     let ibw = 0.0;
     units === "metric" ? (ibw = getMetricIBW()) : (ibw = getImprialIBW());
-    console.log(ibw);
+    units === "metric" ? setIbw(parseFloat(ibw / 2.2).toFixed(2)) : setIbw(ibw);
   };
 
   const handleInputChange = (e) => {
@@ -112,7 +130,11 @@ const IdwCalculator = () => {
         </form>
       </div>
       <div>
-        <h6>{`Your ideal weight is : `}</h6>
+        {units === "metric" ? (
+          <h6>{`Your ideal weight is : ${ibw} kg`}</h6>
+        ) : (
+          <h6>{`Your ideal weight is : ${ibw} lbs`}</h6>
+        )}
       </div>
       <br />
       <button onClick={() => history.push("/")}>home</button>
