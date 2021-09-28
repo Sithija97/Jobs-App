@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BmiCalculator from "./components/bmiCalculator";
 import MainPage from "./components/mainPage";
 import WiCalculator from "./components/wiCalculator";
+import IdwCalculator from "./components/idwCalculator";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Switch>
             <Route path="/bmi" component={BmiCalculator} />
             <Route path="/wi" component={WiCalculator} />
+            <Route path="/idw" component={IdwCalculator} />
             <Route path="/" component={MainPage} />
           </Switch>
         </header>

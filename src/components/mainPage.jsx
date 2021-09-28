@@ -20,6 +20,14 @@ const MainPage = () => {
       >
         know your water intake level
       </button>
+      <br />
+      <button
+        onClick={() => {
+          history.push("/idw");
+        }}
+      >
+        get your ideal weight
+      </button>
     </div>
   );
 };

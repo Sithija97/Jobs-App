@@ -37,8 +37,7 @@ const WiCalculator = () => {
   };
 
   const getWaterIntake = () => {
-    let mass = 0.0,
-      waterLevel = "";
+    let waterLevel = "";
     w_units === "kg"
       ? (waterLevel = getMetric(w_value))
       : (waterLevel = getImperial(w_value));
