@@ -40,8 +40,8 @@ const BmiCalculator = () => {
     );
   };
   const getImprialBMI = () => {
-    let temp_height = h_value * 12;
-    return parseFloat(703 * (w_value / (temp_height * temp_height))).toFixed(2);
+    let inch_height = h_value * 12;
+    return parseFloat(703 * (w_value / (inch_height * inch_height))).toFixed(2);
   };
 
   const getBMI = () => {
