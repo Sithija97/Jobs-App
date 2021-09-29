@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Container from "@mui/material/Container";
-import { Grid } from "@mui/material";
-import ContentAccordion from "./contentAccordion";
+import {
+  Button,
+  ButtonGroup,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from "@mui/material";
+import ReplyIcon from "@mui/icons-material/Reply";
 
 const IdwCalculator = () => {
   let history = useHistory();
@@ -84,75 +94,100 @@ const IdwCalculator = () => {
             style={{ backgroundColor: "#fff" }}
           >
             <div>
-              <h5>Ideal Weight</h5>
+              <Typography variant="h6" component="h2">
+                Ideal Body Weight
+              </Typography>
               <br />
               <div>
                 <form>
                   <div>
-                    units:
-                    {/* {units} <br /> */}
-                    <label> metric</label>
-                    <input
-                      type="radio"
-                      value="metric"
-                      checked={units === "metric"}
-                      onChange={handleUnitsChange}
-                    />
-                    <label> imperial</label>
-                    <input
-                      type="radio"
-                      value="imperial"
-                      checked={units === "imperial"}
-                      onChange={handleUnitsChange}
-                    />
+                    <FormControl component="fieldset">
+                      <RadioGroup
+                        row
+                        aria-label="units"
+                        name="row-radio-buttons-group"
+                      >
+                        <FormControlLabel
+                          value="metric"
+                          checked={units === "metric"}
+                          control={<Radio />}
+                          label="Metric"
+                          onChange={handleUnitsChange}
+                        />
+                        <FormControlLabel
+                          value="imperial"
+                          checked={units === "imperial"}
+                          control={<Radio />}
+                          label="Imperial"
+                          onChange={handleUnitsChange}
+                        />
+                      </RadioGroup>
+                    </FormControl>
                   </div>
                   <div>
-                    gender:
-                    {/* {units} <br /> */}
-                    <label> male</label>
-                    <input
-                      type="radio"
-                      value="male"
-                      checked={gender === "male"}
-                      onChange={handleGenderChange}
-                    />
-                    <label> female</label>
-                    <input
-                      type="radio"
-                      value="female"
-                      checked={gender === "female"}
-                      onChange={handleGenderChange}
-                    />
+                    <FormControl component="fieldset">
+                      <RadioGroup
+                        row
+                        aria-label="gender"
+                        name="row-radio-buttons-group"
+                      >
+                        <FormControlLabel
+                          value="male"
+                          checked={gender === "male"}
+                          control={<Radio />}
+                          label="Male"
+                          onChange={handleGenderChange}
+                        />
+                        <FormControlLabel
+                          value="female"
+                          checked={gender === "female"}
+                          control={<Radio />}
+                          label="Female"
+                          onChange={handleGenderChange}
+                        />
+                      </RadioGroup>
+                    </FormControl>
                   </div>
                   <div>
-                    <input
+                    <TextField
+                      size="small"
+                      helperText=" "
+                      id="demo-helper-text-aligned-no-helper"
                       type="text"
-                      placeholder={
-                        units === "metric" ? "height (m)" : "height (fts)"
-                      }
                       value={height}
                       onChange={handleInputChange}
+                      label={units === "metric" ? "height (m)" : "height (fts)"}
                     />
                   </div>
                   <div>
-                    <button type="submit" onClick={handleSubmit}>
-                      calculate
-                    </button>
-                    <button type="submit" onClick={handleReset}>
-                      reset
-                    </button>
+                    <ButtonGroup disableElevation variant="contained">
+                      <Button type="submit" onClick={handleSubmit}>
+                        Calculate
+                      </Button>
+                      <Button type="submit" onClick={handleReset}>
+                        Reset
+                      </Button>
+                    </ButtonGroup>
                   </div>
                 </form>
               </div>
               <div>
                 {units === "metric" ? (
-                  <h6>{`Your ideal weight is : ${ibw} kg`}</h6>
+                  <p>{`Your ideal weight is : ${ibw} kg`}</p>
                 ) : (
-                  <h6>{`Your ideal weight is : ${ibw} lbs`}</h6>
+                  <p>{`Your ideal weight is : ${ibw} lbs`}</p>
                 )}
               </div>
               <br />
-              <button onClick={() => history.push("/")}>home</button>
+
+              <Button
+                size="small"
+                variant="contained"
+                startIcon={<ReplyIcon />}
+                onClick={() => history.push("/")}
+              >
+                go back
+              </Button>
             </div>
           </Container>
         </Grid>

@@ -30,6 +30,11 @@
   /* color: white; */
 }
 
+.MuiFilledInput-root {
+  border-radius: 10px !important;
+  margin-bottom: 8px !important;
+}
+
 .App-link {
   color: #61dafb;
 }
