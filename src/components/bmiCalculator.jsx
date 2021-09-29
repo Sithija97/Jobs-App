@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { Grid } from "@mui/material";
@@ -42,6 +44,7 @@ const BmiCalculator = () => {
       2
     );
   };
+
   const getImprialBMI = () => {
     let inch_height = h_value * 12;
     return parseFloat(703 * (w_value / (inch_height * inch_height))).toFixed(2);
@@ -51,13 +54,38 @@ const BmiCalculator = () => {
     let bmi = 0.0;
     units === "metric" ? (bmi = getMetricBMI()) : (bmi = getImprialBMI());
     setBmi(bmi);
+    postNotifications(bmi);
+  };
+
+  const postNotifications = (bmi) => {
+    let value = 0.0;
+    value = parseFloat(bmi);
+    if (value < 16) {
+      toast.warning("you're extremely under weight");
+    }
+    if (value < 18.5 && value > 16) {
+      toast.warning("you're under weight");
+    }
+    if (value < 25 && value > 18.6) {
+      toast.success("you're normal weight");
+    }
+    if (value < 30 && value > 25.1) {
+      toast.error("you're over weight");
+    }
+    if (value < 35 && value > 30.1) {
+      toast.error("you're obese class one");
+    }
+    if (value < 40 && value > 35.1) {
+      toast.error("you're obese class two");
+    }
   };
 
   let history = useHistory();
   return (
     <React.Fragment>
+      <ToastContainer theme="colored" />
       <Grid container spacing={1} columns={16}>
-        <Grid item xs={8}>
+        <Grid item xs={16}>
           <Container
             maxWidth="sm"
             className="Container-styles"
@@ -126,7 +154,7 @@ const BmiCalculator = () => {
             </div>
           </Container>
         </Grid>
-        <Grid item xs={8}>
+        {/* <Grid item xs={8}>
           <Container
             maxWidth="sm"
             className="Container-styles"
@@ -134,7 +162,7 @@ const BmiCalculator = () => {
           >
             <ContentAccordion />
           </Container>
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );

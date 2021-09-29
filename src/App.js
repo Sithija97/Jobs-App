@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import BmiCalculator from "./components/bmiCalculator";
 import MainPage from "./components/mainPage";
 import WiCalculator from "./components/wiCalculator";

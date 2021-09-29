@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MainPage = () => {
   let history = useHistory();
+  useEffect(() => {
+    toast.info("Welcome to Health Calculator!");
+  });
   return (
     <div>
+      <ToastContainer theme="colored" />
       <button
         onClick={() => {
           history.push("/bmi");

@@ -77,7 +77,7 @@ const IdwCalculator = () => {
   return (
     <React.Fragment>
       <Grid container spacing={1} columns={16}>
-        <Grid item xs={8}>
+        <Grid item xs={16}>
           <Container
             maxWidth="sm"
             className="Container-styles"
@@ -156,7 +156,7 @@ const IdwCalculator = () => {
             </div>
           </Container>
         </Grid>
-        <Grid item xs={8}>
+        {/* <Grid item xs={8}>
           <Container
             maxWidth="sm"
             className="Container-styles"
@@ -164,7 +164,7 @@ const IdwCalculator = () => {
           >
             <ContentAccordion />
           </Container>
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );

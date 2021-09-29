@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Container from "@mui/material/Container";
 import { Grid } from "@mui/material";
 import ContentAccordion from "./contentAccordion";
@@ -45,12 +47,16 @@ const WiCalculator = () => {
       ? (waterLevel = getMetric(w_value))
       : (waterLevel = getImperial(w_value));
     setWlevel(waterLevel);
+    toast.info(
+      "Take 2 to 3 glasses of water additionally if you exercise or if your environmental conditions are hot."
+    );
   };
 
   return (
     <React.Fragment>
+      <ToastContainer theme="colored" />
       <Grid container spacing={1} columns={16}>
-        <Grid item xs={8}>
+        <Grid item xs={16}>
           <Container
             maxWidth="sm"
             className="Container-styles"
@@ -102,7 +108,7 @@ const WiCalculator = () => {
             </div>
           </Container>
         </Grid>
-        <Grid item xs={8}>
+        {/* <Grid item xs={8}>
           <Container
             maxWidth="sm"
             className="Container-styles"
@@ -110,7 +116,7 @@ const WiCalculator = () => {
           >
             <ContentAccordion />
           </Container>
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );
