@@ -28,6 +28,14 @@ const MainPage = () => {
       >
         get your ideal weight
       </button>
+      <br />
+      <button
+        onClick={() => {
+          history.push("/test");
+        }}
+      >
+        UI Test
+      </button>
     </div>
   );
 };

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Container from "@mui/material/Container";
+import { Grid } from "@mui/material";
+import ContentAccordion from "./contentAccordion";
 
 const WiCalculator = () => {
   const initialstate = {
@@ -45,50 +48,71 @@ const WiCalculator = () => {
   };
 
   return (
-    <div>
-      <h5>Water Intake</h5>
-      <br />
-      <div>
-        <form>
-          <div>
-            <input
-              type="text"
-              placeholder="weight"
-              name="w_value"
-              value={data.w_value}
-              onChange={handleInputChange}
-            />
-            <select
-              type="text"
-              id="weight"
-              name="w_units"
-              value={data.w_units}
-              onChange={handleInputChange}
-            >
-              <option value="" selected disabled hidden>
-                Choose here
-              </option>
-              <option value="kg">kg</option>
-              <option value="lbs">pounds</option>
-            </select>
-          </div>
+    <React.Fragment>
+      <Grid container spacing={1} columns={16}>
+        <Grid item xs={8}>
+          <Container
+            maxWidth="sm"
+            className="Container-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            <div>
+              <h5>Water Intake</h5>
+              <br />
+              <div>
+                <form>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="weight"
+                      name="w_value"
+                      value={data.w_value}
+                      onChange={handleInputChange}
+                    />
+                    <select
+                      type="text"
+                      id="weight"
+                      name="w_units"
+                      value={data.w_units}
+                      onChange={handleInputChange}
+                    >
+                      <option value="" selected disabled hidden>
+                        Choose here
+                      </option>
+                      <option value="kg">kg</option>
+                      <option value="lbs">pounds</option>
+                    </select>
+                  </div>
 
-          <div>
-            <button type="submit" onClick={handleSubmit}>
-              calculate
-            </button>
-            <button type="submit" onClick={handleReset}>
-              reset
-            </button>
-          </div>
-        </form>
-      </div>
-      <div>
-        <h6>{`Your daily water intake is : ${wlevel}`}</h6>
-      </div>
-      <br />
-      <button onClick={() => history.push("/")}>home</button>
-    </div>
+                  <div>
+                    <button type="submit" onClick={handleSubmit}>
+                      calculate
+                    </button>
+                    <button type="submit" onClick={handleReset}>
+                      reset
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div>
+                <h6>{`Your daily water intake is : ${wlevel}`}</h6>
+              </div>
+              <br />
+              <button onClick={() => history.push("/")}>home</button>
+            </div>
+          </Container>
+        </Grid>
+        <Grid item xs={8}>
+          <Container
+            maxWidth="sm"
+            className="Container-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            <ContentAccordion />
+          </Container>
+        </Grid>
+      </Grid>
+    </React.Fragment>
   );
 };
 

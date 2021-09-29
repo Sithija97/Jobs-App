@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Container from "@mui/material/Container";
+import { Grid } from "@mui/material";
+import ContentAccordion from "./contentAccordion";
 
 const BmiCalculator = () => {
   const initialstate = {
@@ -52,63 +55,88 @@ const BmiCalculator = () => {
 
   let history = useHistory();
   return (
-    <div>
-      <h5>Body mass Index</h5>
-      <div>
-        <form>
-          <div>
-            units:
-            {/* {units} <br /> */}
-            <label> metric</label>
-            <input
-              type="radio"
-              value="metric"
-              checked={units === "metric"}
-              onChange={handleRadioChange}
-            />
-            <label> imperial</label>
-            <input
-              type="radio"
-              value="imperial"
-              checked={units === "imperial"}
-              onChange={handleRadioChange}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="h_value"
-              placeholder={units === "metric" ? "height (m)" : "height (fts)"}
-              value={data.h_value}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder={units === "metric" ? "weight (kg)" : "weight (lbs)"}
-              name="w_value"
-              value={data.w_value}
-              onChange={handleInputChange}
-            />
-          </div>
+    <React.Fragment>
+      <Grid container spacing={1} columns={16}>
+        <Grid item xs={8}>
+          <Container
+            maxWidth="sm"
+            className="Container-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            <div>
+              <h5>Body mass Index</h5>
+              <div>
+                <form>
+                  <div>
+                    units:
+                    {/* {units} <br /> */}
+                    <label> metric</label>
+                    <input
+                      type="radio"
+                      value="metric"
+                      checked={units === "metric"}
+                      onChange={handleRadioChange}
+                    />
+                    <label> imperial</label>
+                    <input
+                      type="radio"
+                      value="imperial"
+                      checked={units === "imperial"}
+                      onChange={handleRadioChange}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="h_value"
+                      placeholder={
+                        units === "metric" ? "height (m)" : "height (fts)"
+                      }
+                      value={data.h_value}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder={
+                        units === "metric" ? "weight (kg)" : "weight (lbs)"
+                      }
+                      name="w_value"
+                      value={data.w_value}
+                      onChange={handleInputChange}
+                    />
+                  </div>
 
-          <div>
-            <button type="submit" onClick={handleSubmit}>
-              calculate
-            </button>
-            <button type="submit" onClick={handleReset}>
-              reset
-            </button>
-          </div>
-        </form>
-      </div>
-      <div>
-        <h6>{`Your bmi value is : ${bmi}`}</h6>
-      </div>
-      <br />
-      <button onClick={() => history.push("/")}>home</button>
-    </div>
+                  <div>
+                    <button type="submit" onClick={handleSubmit}>
+                      calculate
+                    </button>
+                    <button type="submit" onClick={handleReset}>
+                      reset
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div>
+                <h6>{`Your bmi value is : ${bmi}`}</h6>
+              </div>
+              <br />
+              <button onClick={() => history.push("/")}>home</button>
+            </div>
+          </Container>
+        </Grid>
+        <Grid item xs={8}>
+          <Container
+            maxWidth="sm"
+            className="Container-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            <ContentAccordion />
+          </Container>
+        </Grid>
+      </Grid>
+    </React.Fragment>
   );
 };
 
