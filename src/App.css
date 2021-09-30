@@ -19,6 +19,13 @@
   padding-top: 9.6vh;
 }
 
+.Cube-styles {
+  min-height: 30vh;
+  width: 35vh !important;
+  border-radius: 15px;
+  padding-top: 9.6vh;
+}
+
 .App-header {
   background-color: #eceff1;
   min-height: 100vh;

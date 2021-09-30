@@ -1,3 +1,4 @@
+import { Container, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,9 +10,55 @@ const MainPage = () => {
     toast.info("Welcome to Health Calculator!");
   });
   return (
-    <div>
+    <React.Fragment>
       <ToastContainer theme="colored" />
-      <button
+
+      <Grid
+        style={{ padding: "30vh" }}
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid item xs={3}>
+          <Container
+            maxWidth="sm"
+            className="Cube-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            0
+          </Container>
+        </Grid>
+        <Grid item xs={3}>
+          <Container
+            maxWidth="sm"
+            className="Cube-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            1
+          </Container>
+        </Grid>
+        <Grid item xs={3}>
+          <Container
+            maxWidth="sm"
+            className="Cube-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            2
+          </Container>
+        </Grid>
+        <Grid item xs={3}>
+          <Container
+            maxWidth="sm"
+            className="Cube-styles"
+            style={{ backgroundColor: "#fff" }}
+          >
+            3
+          </Container>
+        </Grid>
+      </Grid>
+      {/* <button
         onClick={() => {
           history.push("/bmi");
         }}
@@ -34,8 +81,8 @@ const MainPage = () => {
       >
         get your ideal weight
       </button>
-      <br />
-    </div>
+      <br /> */}
+    </React.Fragment>
   );
 };
 
