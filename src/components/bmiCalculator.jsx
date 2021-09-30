@@ -3,8 +3,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
 import Container from "@mui/material/Container";
-import { Grid } from "@mui/material";
-import ContentAccordion from "./contentAccordion";
+import {
+  Button,
+  ButtonGroup,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from "@mui/material";
+import ReplyIcon from "@mui/icons-material/Reply";
 
 const BmiCalculator = () => {
   const initialstate = {
@@ -92,65 +102,87 @@ const BmiCalculator = () => {
             style={{ backgroundColor: "#fff" }}
           >
             <div>
-              <h5>Body mass Index</h5>
+              <Typography variant="h6" component="h2">
+                Body Mass Index
+              </Typography>
               <div>
                 <form>
                   <div>
-                    units:
-                    {/* {units} <br /> */}
-                    <label> metric</label>
-                    <input
-                      type="radio"
-                      value="metric"
-                      checked={units === "metric"}
-                      onChange={handleRadioChange}
-                    />
-                    <label> imperial</label>
-                    <input
-                      type="radio"
-                      value="imperial"
-                      checked={units === "imperial"}
-                      onChange={handleRadioChange}
-                    />
+                    <FormControl component="fieldset">
+                      <RadioGroup
+                        row
+                        aria-label="units"
+                        name="row-radio-buttons-group"
+                      >
+                        <FormControlLabel
+                          value="metric"
+                          checked={units === "metric"}
+                          control={<Radio />}
+                          label="Metric"
+                          onChange={handleRadioChange}
+                        />
+                        <FormControlLabel
+                          value="imperial"
+                          checked={units === "imperial"}
+                          control={<Radio />}
+                          label="Imperial"
+                          onChange={handleRadioChange}
+                        />
+                      </RadioGroup>
+                    </FormControl>
                   </div>
                   <div>
-                    <input
+                    <TextField
+                      size="small"
+                      helperText=" "
+                      id="demo-helper-text-aligned-no-helper"
                       type="text"
                       name="h_value"
-                      placeholder={
-                        units === "metric" ? "height (m)" : "height (fts)"
-                      }
                       value={data.h_value}
                       onChange={handleInputChange}
+                      label={units === "metric" ? "height (m)" : "height (fts)"}
                     />
                   </div>
                   <div>
-                    <input
+                    <TextField
+                      size="small"
+                      helperText=" "
+                      id="demo-helper-text-aligned-no-helper"
                       type="text"
-                      placeholder={
-                        units === "metric" ? "weight (kg)" : "weight (lbs)"
-                      }
                       name="w_value"
                       value={data.w_value}
                       onChange={handleInputChange}
+                      label={
+                        units === "metric" ? "weight (kg)" : "weight (lbs)"
+                      }
                     />
                   </div>
 
                   <div>
-                    <button type="submit" onClick={handleSubmit}>
-                      calculate
-                    </button>
-                    <button type="submit" onClick={handleReset}>
-                      reset
-                    </button>
+                    <ButtonGroup disableElevation variant="contained">
+                      <Button type="submit" onClick={handleSubmit}>
+                        Calculate
+                      </Button>
+                      <Button type="submit" onClick={handleReset}>
+                        Reset
+                      </Button>
+                    </ButtonGroup>
                   </div>
                 </form>
               </div>
               <div>
-                <h6>{`Your bmi value is : ${bmi}`}</h6>
+                <p>{`Your bmi value is : ${bmi}`}</p>
               </div>
               <br />
-              <button onClick={() => history.push("/")}>home</button>
+
+              <Button
+                size="small"
+                variant="contained"
+                startIcon={<ReplyIcon />}
+                onClick={() => history.push("/")}
+              >
+                go back
+              </Button>
             </div>
           </Container>
         </Grid>

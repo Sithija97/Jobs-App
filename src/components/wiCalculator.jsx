@@ -3,8 +3,17 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Container from "@mui/material/Container";
-import { Grid } from "@mui/material";
-import ContentAccordion from "./contentAccordion";
+import {
+  Button,
+  ButtonGroup,
+  FormControl,
+  Grid,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+import ReplyIcon from "@mui/icons-material/Reply";
 
 const WiCalculator = () => {
   const initialstate = {
@@ -55,7 +64,12 @@ const WiCalculator = () => {
   return (
     <React.Fragment>
       <ToastContainer theme="colored" />
-      <Grid container spacing={1} columns={16}>
+      <Grid
+        container
+        spacing={1}
+        columns={16}
+        style={{ justifyContent: "center" }}
+      >
         <Grid item xs={16}>
           <Container
             maxWidth="sm"
@@ -63,48 +77,69 @@ const WiCalculator = () => {
             style={{ backgroundColor: "#fff" }}
           >
             <div>
-              <h5>Water Intake</h5>
+              <Typography variant="h6" component="h2">
+                Water Intake
+              </Typography>
               <br />
               <div>
                 <form>
                   <div>
-                    <input
+                    <TextField
+                      size="small"
+                      helperText=" "
+                      id="demo-helper-text-aligned-no-helper"
                       type="text"
-                      placeholder="weight"
                       name="w_value"
                       value={data.w_value}
                       onChange={handleInputChange}
+                      label="weight"
                     />
-                    <select
-                      type="text"
-                      id="weight"
-                      name="w_units"
-                      value={data.w_units}
-                      onChange={handleInputChange}
-                    >
-                      <option value="" selected disabled hidden>
-                        Choose here
-                      </option>
-                      <option value="kg">kg</option>
-                      <option value="lbs">pounds</option>
-                    </select>
+                    <FormControl sx={{ m: 0, minWidth: 120 }}>
+                      <Select
+                        type="text"
+                        id="weight"
+                        name="w_units"
+                        size="small"
+                        value={data.w_units}
+                        onChange={handleInputChange}
+                        displayEmpty
+                        inputProps={{ "aria-label": "Without label" }}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="kg">kg</MenuItem>
+                        <MenuItem value="lbs">pounds</MenuItem>
+                      </Select>
+                      {/* <FormHelperText>Without label</FormHelperText> */}
+                    </FormControl>
                   </div>
 
                   <div>
-                    <button type="submit" onClick={handleSubmit}>
-                      calculate
-                    </button>
-                    <button type="submit" onClick={handleReset}>
-                      reset
-                    </button>
+                    <ButtonGroup disableElevation variant="contained">
+                      <Button type="submit" onClick={handleSubmit}>
+                        Calculate
+                      </Button>
+                      <Button type="submit" onClick={handleReset}>
+                        Reset
+                      </Button>
+                    </ButtonGroup>
                   </div>
                 </form>
               </div>
               <div>
-                <h6>{`Your daily water intake is : ${wlevel}`}</h6>
+                <p>{`Your daily water intake is : ${wlevel}`}</p>
               </div>
               <br />
-              <button onClick={() => history.push("/")}>home</button>
+
+              <Button
+                size="small"
+                variant="contained"
+                startIcon={<ReplyIcon />}
+                onClick={() => history.push("/")}
+              >
+                go back
+              </Button>
             </div>
           </Container>
         </Grid>
