@@ -4,10 +4,12 @@ import React from "react";
 
 const JobCard = () => {
   return (
-    <Box>
-      <Grid container>
+    <Box p={2} className="jobCardWrapper">
+      <Grid container alignItems="center">
         <Grid item xs>
           <Typography>Frontend Developer</Typography>
+        </Grid>
+        <Grid item xs>
           <Typography>Google</Typography>
         </Grid>
         <Grid item container xs>

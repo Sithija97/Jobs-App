@@ -32,3 +32,15 @@ code {
 .searchButton {
   margin-top: 7px !important;
 }
+
+.jobCardWrapper {
+  border: 1px solid #dad9d9;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.jobCardWrapper:hover {
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1);
+  border-left: 10px solid #4d64e4;
+}
