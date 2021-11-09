@@ -8,7 +8,7 @@ const SearchBar = () => {
       <Select
         className="wrapperInElements"
         variant="filled"
-        disableUnderline
+        disableunderline="true"
         defaultValue="Full time"
       >
         <MenuItem value="Full time">Full time</MenuItem>
@@ -18,7 +18,7 @@ const SearchBar = () => {
       <Select
         className="wrapperInElements"
         variant="filled"
-        disableUnderline
+        disableunderline="true"
         defaultValue="Remote"
       >
         <MenuItem value="Remote">Remote</MenuItem>
@@ -26,6 +26,7 @@ const SearchBar = () => {
       </Select>
       <Button
         className="wrapperInElements searchButton"
+        disableunderline="true"
         variant="contained"
         color="primary"
       >

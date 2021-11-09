@@ -8,8 +8,16 @@ const Header = () => {
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <Box display="flex" justifyContent="space-between">
-            <Typography variant="h4">Open Job Listing</Typography>
-            <Button variant="contained">Post a Job</Button>
+            <Typography variant="h4" style={{ fontWeight: "bold" }}>
+              Open Job Listing
+            </Typography>
+            <Button
+              variant="contained"
+              disableunderline="true"
+              className="MuiButton"
+            >
+              Post a Job
+            </Button>
           </Box>
         </Grid>
       </Grid>
