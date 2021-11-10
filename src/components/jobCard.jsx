@@ -22,8 +22,8 @@ const JobCard = (props) => {
         </Grid>
         <Grid item xs>
           <Typography>
-            {differenceInMinutes(Date.now(), props.postedOn)} | {props.type} |{" "}
-            {props.location}
+            {differenceInMinutes(Date.now(), props.postedOn)} min ago |{" "}
+            {props.type} | {props.location}
           </Typography>
         </Grid>
         <Grid item xs>
