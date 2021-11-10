@@ -5,8 +5,15 @@ import JobCard from "./jobCard";
 import NewJobModal from "./newJobModal";
 import SearchBar from "./searchBar";
 import JobData from "../Data.js";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../firebase/config";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { app, db } from "../firebase/config";
 import { Box } from "@mui/system";
 
 const Index = () => {
@@ -29,6 +36,13 @@ const Index = () => {
     console.log(jobs);
   };
 
+  const postJob = async (jobDetails) => {
+    await await addDoc(collection(db, "jobs"), {
+      ...jobDetails,
+      postedOn: serverTimestamp(),
+    });
+  };
+
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -36,7 +50,7 @@ const Index = () => {
   return (
     <React.Fragment>
       <Header />
-      <NewJobModal />
+      <NewJobModal postJob={postJob} />
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <SearchBar />

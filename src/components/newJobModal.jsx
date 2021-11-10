@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
-const NewJobModal = () => {
+const NewJobModal = (props) => {
   const initialState = {
     title: "",
     type: "Full time",
@@ -37,9 +37,10 @@ const NewJobModal = () => {
     setJobDetails({ ...jobDetails, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(jobDetails);
+    await props.postJob(jobDetails);
+    setJobDetails(initialState);
   };
 
   const handleSkills = (skill) =>
