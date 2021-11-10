@@ -25,8 +25,8 @@ const Index = () => {
       postedOn: doc.data().postedOn.toDate(),
     }));
     await setJobs(tempData);
-    console.log(jobs);
     setLoading(false);
+    console.log(jobs);
   };
 
   useEffect(() => {
