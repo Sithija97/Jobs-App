@@ -17,12 +17,14 @@ import {
 } from "firebase/firestore";
 import { app, db } from "../firebase/config";
 import { Box } from "@mui/system";
+import JobViewModal from "./jobViewModal";
 
 const Index = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [jobModal, setJobModal] = useState(false);
   const [customSearch, setCustomSearch] = useState(false);
+  const [jobView, setJobView] = useState({});
 
   const fetchJobs = async () => {
     setLoading(true);
@@ -68,6 +70,10 @@ const Index = () => {
     setLoading(false);
   };
 
+  const openJobDetails = (job) => {
+    setJobView(job);
+  };
+
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -80,6 +86,7 @@ const Index = () => {
         postJob={postJob}
         setJobModalClose={() => setJobModal(false)}
       />
+      <JobViewModal job={jobView} closeModal={() => setJobView({})} />
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <SearchBar fetchJobsCustom={fetchJobsCustom} />
@@ -98,7 +105,11 @@ const Index = () => {
                 </Box>
               )}
               {jobs.map((job) => (
-                <JobCard key={job.id} {...job} />
+                <JobCard
+                  open={() => openJobDetails(job)}
+                  key={job.id}
+                  {...job}
+                />
               ))}
             </>
           )}

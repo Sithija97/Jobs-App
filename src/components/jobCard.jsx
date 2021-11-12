@@ -28,7 +28,11 @@ const JobCard = (props) => {
         </Grid>
         <Grid item xs>
           <Grid item ml={10}>
-            <Button variant="contained" className="MuiButton">
+            <Button
+              variant="contained"
+              className="MuiButton"
+              onClick={props.open}
+            >
               Check
             </Button>
           </Grid>
