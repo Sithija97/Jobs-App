@@ -1,4 +1,5 @@
-import { CircularProgress, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid } from "@mui/material";
+import { CloseOutlined } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import Header from "./header";
 import JobCard from "./jobCard";
@@ -9,6 +10,7 @@ import {
   collection,
   getDocs,
   query,
+  where,
   orderBy,
   addDoc,
   serverTimestamp,
@@ -19,8 +21,12 @@ import { Box } from "@mui/system";
 const Index = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [jobModal, setJobModal] = useState(false);
+  const [customSearch, setCustomSearch] = useState(false);
 
   const fetchJobs = async () => {
+    setLoading(true);
+    setCustomSearch(false);
     const queryData = query(
       collection(db, "jobs"),
       orderBy("postedOn", "desc")
@@ -33,14 +39,33 @@ const Index = () => {
     }));
     await setJobs(tempData);
     setLoading(false);
-    console.log(jobs);
   };
 
   const postJob = async (jobDetails) => {
-    await await addDoc(collection(db, "jobs"), {
+    await addDoc(collection(db, "jobs"), {
       ...jobDetails,
       postedOn: serverTimestamp(),
     });
+    fetchJobs();
+  };
+
+  const fetchJobsCustom = async (jobsearch) => {
+    setLoading(true);
+    setCustomSearch(true);
+    const queryData = query(
+      collection(db, "jobs"),
+      where("type", "==", jobsearch.type),
+      where("location", "==", jobsearch.location),
+      orderBy("postedOn", "desc")
+    );
+    const response = await getDocs(queryData);
+    const tempData = response.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+      postedOn: doc.data().postedOn.toDate(),
+    }));
+    await setJobs(tempData);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -49,18 +74,33 @@ const Index = () => {
 
   return (
     <React.Fragment>
-      <Header />
-      <NewJobModal postJob={postJob} />
+      <Header setJobModal={() => setJobModal(true)} />
+      <NewJobModal
+        jobModal={jobModal}
+        postJob={postJob}
+        setJobModalClose={() => setJobModal(false)}
+      />
       <Grid container justifyContent="center">
         <Grid item xs={10}>
-          <SearchBar />
+          <SearchBar fetchJobsCustom={fetchJobsCustom} />
 
           {loading ? (
             <Box mt={8} display="flex" justifyContent="center">
               <CircularProgress />
             </Box>
           ) : (
-            jobs.map((job) => <JobCard key={job.id} {...job} />)
+            <>
+              {customSearch && (
+                <Box my={2} display="flex" justifyContent="flex-end">
+                  <Button variant="secondary" onClick={fetchJobs}>
+                    <CloseOutlined size={20} /> Custom Search
+                  </Button>
+                </Box>
+              )}
+              {jobs.map((job) => (
+                <JobCard key={job.id} {...job} />
+              ))}
+            </>
           )}
         </Grid>
       </Grid>

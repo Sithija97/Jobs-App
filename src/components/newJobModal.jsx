@@ -15,6 +15,8 @@ import {
   DialogActions,
   Button,
   IconButton,
+  CircularProgress,
+  Alert,
 } from "@mui/material";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
@@ -30,6 +32,7 @@ const NewJobModal = (props) => {
     skills: [],
   };
   const [jobDetails, setJobDetails] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   const skills = ["javascript", "react", "node", "firebase", "mongodb"];
 
   const handleInputChange = (e) => {
@@ -39,8 +42,21 @@ const NewJobModal = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    for (const field in jobDetails) {
+      if (typeof jobDetails[field] === "string" && !jobDetails[field]) {
+        alert("All the input fields should be filled.");
+        return;
+      }
+    }
+    setLoading(true);
     await props.postJob(jobDetails);
+    closeModal();
+  };
+
+  const closeModal = () => {
     setJobDetails(initialState);
+    setLoading(false);
+    props.setJobModalClose();
   };
 
   const handleSkills = (skill) =>
@@ -57,7 +73,7 @@ const NewJobModal = (props) => {
         }));
 
   return (
-    <Dialog fullWidth open={true}>
+    <Dialog fullWidth open={props.jobModal}>
       <DialogTitle>
         <Box
           display="flex"
@@ -66,7 +82,7 @@ const NewJobModal = (props) => {
           alignItems="center"
         >
           Post Job
-          <IconButton>
+          <IconButton onClick={closeModal}>
             <CancelPresentationIcon />
           </IconButton>
         </Box>
@@ -167,7 +183,7 @@ const NewJobModal = (props) => {
         </Grid>
         <Box mt={2}>
           <Typography mb={2}>Skills</Typography>
-          <Stack direction="row" spacing={1}>
+          <Stack direction="row" spacing={1} id={1}>
             {skills.map((skill) => (
               <Chip
                 variant="contained"
@@ -198,8 +214,13 @@ const NewJobModal = (props) => {
             variant="contained"
             disableunderline="true"
             onClick={handleSubmit}
+            disabled={loading}
           >
-            Post job
+            {loading ? (
+              <CircularProgress color="primary" size={22} />
+            ) : (
+              "Post job"
+            )}
           </Button>
         </Box>
       </DialogActions>

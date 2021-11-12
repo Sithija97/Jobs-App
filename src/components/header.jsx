@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <Box py={10} className="headerBox" color="white">
       <Grid container justifyContent="center">
@@ -15,6 +15,7 @@ const Header = () => {
               variant="contained"
               disableunderline="true"
               className="MuiButton"
+              onClick={props.setJobModal}
             >
               Post a Job
             </Button>
